@@ -1,6 +1,7 @@
 package ar.net.dahool.upsmonitor.data.repository
 
 import ar.net.dahool.upsmonitor.data.model.DeviceRegistration
+import ar.net.dahool.upsmonitor.data.model.StatusEvent
 import ar.net.dahool.upsmonitor.data.model.UpsMetrics
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -11,7 +12,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 sealed class UpsResult {
-    data class Success(val metrics: UpsMetrics) : UpsResult()
+    data class Success(val metrics: UpsMetrics, val history: List<StatusEvent> = emptyList()) : UpsResult()
     data class Error(val message: String) : UpsResult()
 }
 
@@ -59,8 +60,14 @@ class UpsRepository {
             return UpsResult.Error("Server URL is not configured. Tap the settings icon to set it.")
         }
         return try {
-            val metrics = buildService(baseUrl).getStatus()
-            UpsResult.Success(metrics)
+            val service = buildService(baseUrl)
+            val metrics = service.getStatus()
+            val history = try {
+                service.getStatusHistory()
+            } catch (e: Exception) {
+                emptyList()
+            }
+            UpsResult.Success(metrics, history)
         } catch (e: java.net.ConnectException) {
             UpsResult.Error("Cannot reach server at $baseUrl.\nCheck the URL and your network connection.")
         } catch (e: java.net.SocketTimeoutException) {

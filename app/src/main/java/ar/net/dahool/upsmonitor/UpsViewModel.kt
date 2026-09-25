@@ -21,9 +21,15 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
+import ar.net.dahool.upsmonitor.data.model.StatusEvent
+
 sealed class UiState {
     object Loading : UiState()
-    data class Success(val metrics: UpsMetrics, val lastUpdated: Long = System.currentTimeMillis()) : UiState()
+    data class Success(
+        val metrics: UpsMetrics,
+        val history: List<StatusEvent> = emptyList(),
+        val lastUpdated: Long = System.currentTimeMillis()
+    ) : UiState()
     data class Error(val message: String) : UiState()
     object Unconfigured : UiState()
 }
@@ -71,7 +77,7 @@ class UpsViewModel(application: Application) : AndroidViewModel(application) {
                 _uiState.value = UiState.Loading
             }
             when (val result = repository.fetchStatus(url)) {
-                is UpsResult.Success -> _uiState.value = UiState.Success(result.metrics)
+                is UpsResult.Success -> _uiState.value = UiState.Success(result.metrics, result.history)
                 is UpsResult.Error -> _uiState.value = UiState.Error(result.message)
             }
         }

@@ -18,6 +18,8 @@ import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.*
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.net.dahool.upsmonitor.UiState
+import ar.net.dahool.upsmonitor.data.model.StatusEvent
 import ar.net.dahool.upsmonitor.data.model.UpsMetrics
 import ar.net.dahool.upsmonitor.ui.components.InfoRow
 import ar.net.dahool.upsmonitor.ui.components.MetricCard
@@ -94,7 +97,7 @@ fun DashboardScreen(
             ) { state ->
                 when (state) {
                     is UiState.Loading -> LoadingContent()
-                    is UiState.Success -> DashboardContent(state.metrics)
+                    is UiState.Success -> DashboardContent(state.metrics, state.history)
                     is UiState.Error -> ErrorContent(state.message, onRefresh)
                     is UiState.Unconfigured -> UnconfiguredContent(onSettingsClick)
                 }
@@ -104,8 +107,9 @@ fun DashboardScreen(
 }
 
 @Composable
-private fun DashboardContent(m: UpsMetrics) {
+private fun DashboardContent(m: UpsMetrics, history: List<StatusEvent> = emptyList()) {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -172,6 +176,15 @@ private fun DashboardContent(m: UpsMetrics) {
             modifier = Modifier.fillMaxWidth()
         )
 
+        if (m.lastIncident != null) {
+            MetricCard(
+                label = "Last Incident",
+                value = m.lastIncident.getFormattedChangedAt(context),
+                accentColor = UpsColors.battery,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
         SectionCard(label = "Power Input", icon = Icons.Outlined.ElectricalServices) {
             InfoRow("Input Voltage", "${m.inputVoltage} V")
             HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
@@ -182,6 +195,17 @@ private fun DashboardContent(m: UpsMetrics) {
             InfoRow("Voltage", "${m.batteryVoltage} V")
             HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
             InfoRow("Nominal Voltage", "${m.batteryVoltageNominal} V")
+        }
+
+        if (history.isNotEmpty()) {
+            SectionCard(label = "Event History", icon = Icons.Outlined.History) {
+                history.forEachIndexed { index, event ->
+                    InfoRow(event.getFormattedChangedAt(context), event.status)
+                    if (index < history.size - 1) {
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
+                    }
+                }
+            }
         }
 
         SectionCard(label = "Device Info", icon = Icons.Outlined.Info) {
