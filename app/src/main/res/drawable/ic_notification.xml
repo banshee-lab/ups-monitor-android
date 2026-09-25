@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+    <!-- Material-style lightning bolt (must be white/transparent for notification) -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M13,2 L4.5,13.5 L10,13.5 L11,22 L19.5,10.5 L14,10.5 Z" />
+</vector>

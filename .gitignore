@@ -1,0 +1,102 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+app/build/
+build/
+
+# Gradle files
+.gradle/
+gradle-app.setting
+.gradletasknamecache
+
+# Local configuration file (sdk/ndk paths)
+local.properties
+
+# Eclipse project files
+.project
+.classpath
+.settings/
+
+# IntelliJ IDEA/Android Studio files
+.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dependency-graph.xml
+.idea/scala_compiler.xml
+.idea/sbt.xml
+.idea/libraries/
+.idea/caches/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/codeStyles/
+.idea/inspectionProfiles/
+.idea/shelf/
+# Nota: Puedes mantener .idea/gradle.xml y .idea/runConfigurations/ si quieres compartir configuraciones con tu equipo.
+
+# Visual Studio Code files
+.vscode/
+
+# Native build files
+.cxx/
+.externalNativeBuild/
+
+# PKCS12 Signature files
+*.jks
+*.keystore
+
+# External tool/IDE generated files
+.settings/
+.apt_generated/
+.factorypath
+.sts_maven_dependencies
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Captures from the Android Monitor
+captures/
+
+# Firebase hosting
+.firebase/
+
+# Crashlytics syndication
+com_crashlytics_export_strings.xml
+
+# Built-in Gradle remote build cache
+.gradle/build-cache/
+
+# Linting files
+lint/

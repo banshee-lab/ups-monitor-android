@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "139984205039",
+    "project_id": "server-monitor-ed5b1",
+    "storage_bucket": "server-monitor-ed5b1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139984205039:android:a834a0dac5a1866b72971a",
+        "android_client_info": {
+          "package_name": "ar.net.dahool.upsmonitor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYggT6txpgx936GTlNse0fsGj6mbhyxjg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!--
+        Signature element: a UPS device body (rounded rect tower, the recognizable
+        physical object) with an AC sine wave resolving into a flat DC line as it
+        crosses the device — this is what reads as "power conversion / backup power"
+        rather than a generic bolt icon.
+        Safe zone for adaptive icons is the inner 66dp circle (72dp with system mask),
+        so all content is kept within roughly x=21..87, y=21..87.
+    -->
+
+    <!-- Device body -->
+    <path
+        android:fillColor="#1B2330"
+        android:pathData="M30,24
+                           L78,24
+                           C81.3,24 84,26.7 84,30
+                           L84,78
+                           C84,81.3 81.3,84 78,84
+                           L30,84
+                           C26.7,84 24,81.3 24,78
+                           L24,30
+                           C24,26.7 26.7,24 30,24 Z" />
+
+    <!-- Device body outline -->
+    <path
+        android:strokeColor="#30363D"
+        android:strokeWidth="1.4"
+        android:fillColor="#00000000"
+        android:pathData="M30,24
+                           L78,24
+                           C81.3,24 84,26.7 84,30
+                           L84,78
+                           C84,81.3 81.3,84 78,84
+                           L30,84
+                           C26.7,84 24,81.3 24,78
+                           L24,30
+                           C24,26.7 26.7,24 30,24 Z" />
+
+    <!-- Status dot (top-right indicator light, like a real UPS) -->
+    <path
+        android:fillColor="#3FB950"
+        android:pathData="M72,33 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0" />
+
+    <!-- Power waveform: AC sine resolving into flat DC line, the signature mark -->
+    <path
+        android:strokeColor="#58A6FF"
+        android:strokeWidth="3.4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillColor="#00000000"
+        android:pathData="M30,58
+                           C34,46 40,46 44,58
+                           C48,70 54,70 58,58
+                           L78,58" />
+
+</vector>
